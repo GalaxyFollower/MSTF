@@ -16,7 +16,7 @@ set(groot, 'DefaultLineLineWidth', 1, ...
   
 % Data
 
-pathname = '/Users/tmattner/Desktop/Assign3/Data/';
+pathname = '/home/tmattner/Teaching/MSTF/2017/Assignments/Assign3/Data/';
 jobname = 'turb_64_re200_'
 
 % Simulation parameters.
@@ -63,15 +63,15 @@ while (idump <= ndump)
     vh = fftn(v);
     wh = fftn(w);
     
-    dudx = real(ifftn(ikx.*uh));
-    dudy = real(ifftn(iky.*uh));
-    dudz = real(ifftn(ikz.*uh));
-    dvdx = real(ifftn(ikx.*vh));
-    dvdy = real(ifftn(iky.*vh));
-    dvdz = real(ifftn(ikz.*vh));
-    dwdx = real(ifftn(ikx.*wh));
-    dwdy = real(ifftn(iky.*wh));
-    dwdz = real(ifftn(ikz.*wh));
+    dudx = ifftn(ikx.*uh);
+    dudy = ifftn(iky.*uh);
+    dudz = ifftn(ikz.*uh);
+    dvdx = ifftn(ikx.*vh);
+    dvdy = ifftn(iky.*vh);
+    dvdz = ifftn(ikz.*vh);
+    dwdx = ifftn(ikx.*wh);
+    dwdy = ifftn(iky.*wh);
+    dwdz = ifftn(ikz.*wh);
     
     % Enstrophy
         

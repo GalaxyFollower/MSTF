@@ -83,19 +83,19 @@ while (t < tdump*ndump)
         
         % Nonlinear terms.
         
-        u = ifftn(uh);
-        v = ifftn(vh);
-        w = ifftn(wh);
+        u = ifftn(uh, 'symmetric');
+        v = ifftn(vh, 'symmetric');
+        w = ifftn(wh, 'symmetric');
         
-        dudx = ifftn(ikx.*uh);
-        dudy = ifftn(iky.*uh);
-        dudz = ifftn(ikz.*uh);
-        dvdx = ifftn(ikx.*vh);
-        dvdy = ifftn(iky.*vh);
-        dvdz = ifftn(ikz.*vh);
-        dwdx = ifftn(ikx.*wh);
-        dwdy = ifftn(iky.*wh);
-        dwdz = ifftn(ikz.*wh);
+        dudx = ifftn(ikx.*uh, 'symmetric');
+        dudy = ifftn(iky.*uh, 'symmetric');
+        dudz = ifftn(ikz.*uh, 'symmetric');
+        dvdx = ifftn(ikx.*vh, 'symmetric');
+        dvdy = ifftn(iky.*vh, 'symmetric');
+        dvdz = ifftn(ikz.*vh, 'symmetric');
+        dwdx = ifftn(ikx.*wh, 'symmetric');
+        dwdy = ifftn(iky.*wh, 'symmetric');
+        dwdz = ifftn(ikz.*wh, 'symmetric');
         
         hxh = 0.5*fftn(u.*dudx + v.*dudy + w.*dudz);
         hyh = 0.5*fftn(u.*dvdx + v.*dvdy + w.*dvdz);
@@ -128,9 +128,9 @@ while (t < tdump*ndump)
         
     end
     
-    u = ifftn(uh);
-    v = ifftn(vh);
-    w = ifftn(wh);
+    u = ifftn(uh, 'symmetric');
+    v = ifftn(vh, 'symmetric');
+    w = ifftn(wh, 'symmetric');
     
     toc
     

@@ -63,15 +63,15 @@ while (idump <= ndump)
     vh = fftn(v);
     wh = fftn(w);
     
-    dudx = ifftn(ikx.*uh);
-    dudy = ifftn(iky.*uh);
-    dudz = ifftn(ikz.*uh);
-    dvdx = ifftn(ikx.*vh);
-    dvdy = ifftn(iky.*vh);
-    dvdz = ifftn(ikz.*vh);
-    dwdx = ifftn(ikx.*wh);
-    dwdy = ifftn(iky.*wh);
-    dwdz = ifftn(ikz.*wh);
+    dudx = ifftn(ikx.*uh, 'symmetric');
+    dudy = ifftn(iky.*uh, 'symmetric');
+    dudz = ifftn(ikz.*uh, 'symmetric');
+    dvdx = ifftn(ikx.*vh, 'symmetric');
+    dvdy = ifftn(iky.*vh, 'symmetric');
+    dvdz = ifftn(ikz.*vh, 'symmetric');
+    dwdx = ifftn(ikx.*wh, 'symmetric');
+    dwdy = ifftn(iky.*wh, 'symmetric');
+    dwdz = ifftn(ikz.*wh, 'symmetric');
     
     % Enstrophy
         

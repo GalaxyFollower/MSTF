@@ -10,13 +10,13 @@ b = [ 1.0/3.0 15.0/16.0 8.0/15.0 ];
 
 % Output parameters
 
-pathname = '/home/tmattner/Teaching/MSTF/2016/Notes/Run';
+pathname = '/home/tmattner/Teaching/MSTF/Notes/Run';
 jobname = 'test'
 
 % Simulation parameters.
 
 n = 32;       % grid size
-kinvis = 0.002; % kinematic viscosity
+kinvis = 0.2; % kinematic viscosity
 cfl = 0.5;    % time-step restriction
 tdump = 0.1;  % time between data dumps
 ndump = 100;  % number of dumps
@@ -30,6 +30,7 @@ x = dx*[0:n-1];
 
 % Wavenumbers
 
+dk = 1;
 k2 = [0:n/2-1 -n/2:-1].^2;
 [kx2, ky2, kz2] = ndgrid(k2, k2, k2);
 k2 = kx2 + ky2 + kz2;
@@ -82,19 +83,19 @@ while (t < tdump*ndump)
         
         % Nonlinear terms.
         
-        u = real(ifftn(uh));
-        v = real(ifftn(vh));
-        w = real(ifftn(wh));
+        u = ifftn(uh);
+        v = ifftn(vh);
+        w = ifftn(wh);
         
-        dudx = real(ifftn(ikx.*uh));
-        dudy = real(ifftn(iky.*uh));
-        dudz = real(ifftn(ikz.*uh));
-        dvdx = real(ifftn(ikx.*vh));
-        dvdy = real(ifftn(iky.*vh));
-        dvdz = real(ifftn(ikz.*vh));
-        dwdx = real(ifftn(ikx.*wh));
-        dwdy = real(ifftn(iky.*wh));
-        dwdz = real(ifftn(ikz.*wh));
+        dudx = ifftn(ikx.*uh);
+        dudy = ifftn(iky.*uh);
+        dudz = ifftn(ikz.*uh);
+        dvdx = ifftn(ikx.*vh);
+        dvdy = ifftn(iky.*vh);
+        dvdz = ifftn(ikz.*vh);
+        dwdx = ifftn(ikx.*wh);
+        dwdy = ifftn(iky.*wh);
+        dwdz = ifftn(ikz.*wh);
         
         hxh = 0.5*fftn(u.*dudx + v.*dudy + w.*dudz);
         hyh = 0.5*fftn(u.*dvdx + v.*dvdy + w.*dvdz);
@@ -127,9 +128,9 @@ while (t < tdump*ndump)
         
     end
     
-    u = real(ifftn(uh));
-    v = real(ifftn(vh));
-    w = real(ifftn(wh));
+    u = ifftn(uh);
+    v = ifftn(vh);
+    w = ifftn(wh);
     
     toc
     
@@ -163,9 +164,6 @@ while (t < tdump*ndump)
 
     tke = 0.5*sum(u(:).^2 + v(:).^2 + w(:).^2)/n^3 
     
-    clf
-    isosurface(u, 0.1)
-    drawnow
 end
 
 
